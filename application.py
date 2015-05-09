@@ -1,4 +1,6 @@
 __author__ = 'Liam'
+from random import randrange
+
 from room import *
 
 
@@ -21,6 +23,7 @@ class Player:
         self.spirit = 'Boar'
         self.inventory = []
         self.location = location
+        self.actions = {'1': self.search, '2': self.grab, '3': self.gurgle}
 
     def forward(self):
         pass
@@ -55,7 +58,8 @@ class Player:
               .format(self.name, enemy.species))
 
     def search(self):
-        print(self.location.list_contents())
+        print('\nYou found the following items. Neat.\n{}'
+              .format(', '.join(self.location.contents)))
 
 
 def main():
@@ -71,15 +75,11 @@ def main():
           .format(player.location.name, player.location.exits))
 
     while escaping:
+        # need to replace hard list with extract from player.actions
         action = input('\nWhat now?\n\n1. Search\t2. Grab\t3. Gurgle\n>')
-        if action == 'Gurgle':
-            player.gurgle(player.location.contents(
-                randrange(len(player.location.contents))))
-        if action == '2' or action == 'Grab':
-            player.grab()
-        if action == '1' or action == 'Search':
-            print('\nYou found the following items. Neat.')
-            player.search()
+
+        if action in player.actions.keys():
+            player.actions[action]()
 
 
 main()

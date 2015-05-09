@@ -6,10 +6,15 @@ class Enemy:
         self.will = will
         self.perception = perception
         self.intelligence = intelligence
+        self.disabled = False
+
+    def alert(self):
+        self.will += 10
+        self.perception += 10
 
 
 class Dog(Enemy):
     def __init__(self):
         super().__init__(75, 100, 50)
-        self.species = 'Dog'
+        self.species = 'dog'
         self.name = 'Fido'

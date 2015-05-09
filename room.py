@@ -1,6 +1,6 @@
 __author__ = 'Liam'
 
-from random import random, randrange
+from random import random
 
 from enemy import Dog
 
@@ -10,10 +10,10 @@ class Room:
         self.name = name
         self.interior = interior
         self.contents = contents
-        self.exits = randrange(1, 5)
+        # self.exits = randrange(1, 5)
 
-    def list_contents(self):
-        return ', '.join(self.contents)
+    def add(self, item):
+        self.contents.append(item)
 
     def remove(self, item):
         self.contents.remove(item)
@@ -22,6 +22,7 @@ class Room:
 class LivingRoom(Room):
     def __init__(self):
         super().__init__('Living Room', True, ['Arm-chair', 'dog biscuit'])
+        self.exits = [Kitchen, Backyard]
 
 
 class Kitchen(Room):
